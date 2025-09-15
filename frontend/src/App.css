@@ -1,0 +1,173 @@
+/* Main container */
+.container {
+  display: flex;
+  justify-content: flex-start; /* align left */
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  min-height: 100vh;
+  background: #f9fafb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-y: auto; 
+}
+.parsed-details {
+  background: #f8f9fb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+.loader{
+  text-align: center;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.detail-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.detail-card p {
+  margin: 0;
+  font-weight: 600;
+  color: #555;
+}
+
+.detail-card span {
+  display: block;
+  margin-top: 5px;
+  color: #333;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.title {
+ text-align: center;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 280px;
+}
+
+/* Upload box */
+.upload-box {
+  width: 100%;
+  height: 180px;
+  border: 2px dashed #6c63ff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: #fff;
+  padding: 8px;
+}
+
+.upload-box:hover {
+  background: #f0f0ff;
+  border-color: #4a3aff;
+}
+
+.upload-box p {
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+}
+
+/* Upload content */
+.upload-content {
+  flex: 1;
+  width: 100%;
+  border-radius: 6px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Upload placeholder text */
+.upload-content span {
+  font-size: 12px;
+  color: #555;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* Image preview inside upload-content */
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 10px;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: #4a3aff;
+}
+
+/* Right Side - Result Box */
+.result-box {
+  flex: 1;
+  background:#f8f9fb;
+  margin-left: 20px;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Placeholder before submit */
+.placeholder-text {
+  color: #504a4a;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.result-box h3 {
+  margin-top: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.result-box pre {
+  background: #f3f4f6;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
