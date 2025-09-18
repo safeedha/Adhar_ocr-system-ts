@@ -5,7 +5,7 @@ import { FiUploadCloud } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import type{OcrResult,OcrApiResponse } from '../interfaces'
+import type{OcrResult,OcrApiResponse } from './interfaces'
 import ClipLoader from "react-spinners/ClipLoader";
 
 
@@ -54,7 +54,7 @@ const UploadForm: React.FC = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-
+     console.log(res)
       if (res.data.message.status === false) {
         toast.error(res.data.message.message);
       } else {
