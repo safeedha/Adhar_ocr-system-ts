@@ -171,3 +171,25 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.reset-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  background-color: #d9363e;
+}

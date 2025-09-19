@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import type{ChangeEvent, FormEvent} from 'react'
+import React, { useState, useRef } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { FiUploadCloud } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import type{OcrResult,OcrApiResponse } from './interfaces'
+import type { OcrResult } from "./interfaces";
 import ClipLoader from "react-spinners/ClipLoader";
-
-
 
 const UploadForm: React.FC = () => {
   const [front, setFront] = useState<File | null>(null);
@@ -17,6 +15,10 @@ const UploadForm: React.FC = () => {
   const [backPreview, setBackPreview] = useState<string | null>(null);
   const [result, setResult] = useState<OcrResult | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Refs for file inputs to reset them properly
+  const frontInputRef = useRef<HTMLInputElement | null>(null);
+  const backInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFrontUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -47,26 +49,41 @@ const UploadForm: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post<OcrApiResponse>(
+      const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/ocr`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-     console.log(res)
+      console.log(res);
       if (res.data.status === false) {
         toast.error(res.data.message);
       } else {
         toast.success("✅ OCR Processed Successfully!");
-        setResult(res.data.data ?? null);
+        console.log(res.data.data.data);
+        setResult(res.data.data.data ?? null);
       }
     } catch (err) {
-      console.log("this",import.meta.env.VITE_API_URL);
+      console.log("this", import.meta.env.VITE_API_URL);
       console.error(err);
       toast.error("❌ OCR Failed. Please try again.");
     }
     setLoading(false);
+  };
+
+  // Reset everything
+  const handleReset = () => {
+    setFront(null);
+    setBack(null);
+    setFrontPreview(null);
+    setBackPreview(null);
+    setResult(null);
+    setLoading(false);
+
+    // Reset file inputs
+    if (frontInputRef.current) frontInputRef.current.value = "";
+    if (backInputRef.current) backInputRef.current.value = "";
   };
 
   return (
@@ -99,6 +116,7 @@ const UploadForm: React.FC = () => {
                 type="file"
                 accept="image/*"
                 hidden
+                ref={frontInputRef}
                 onChange={handleFrontUpload}
               />
             </div>
@@ -123,14 +141,28 @@ const UploadForm: React.FC = () => {
                 type="file"
                 accept="image/*"
                 hidden
+                ref={backInputRef}
                 onChange={handleBackUpload}
               />
             </div>
           </label>
 
-          <button type="submit" className="submit-btn">
-            {loading ? "Processing..." : "PARSE AADHAAR"}
-          </button>
+          <div className="form-actions">
+            <button type="submit" className="submit-btn" disabled={loading}>
+              {loading ? "Processing..." : "PARSE AADHAAR"}
+            </button>
+             {(front || back || result) && (
+              <button
+                type="button"
+                className="reset-btn"
+                onClick={handleReset}
+                disabled={loading}
+              >
+                RESET
+              </button>
+            )}
+                      
+          </div>
         </form>
 
         <div className="result-box">
@@ -139,9 +171,9 @@ const UploadForm: React.FC = () => {
               Results will be displayed here after submitting.
             </p>
           )}
-          {loading&&(
-            <div className='loader'>
-             <ClipLoader color="#36d7b7" size={50} />
+          {loading && (
+            <div className="loader">
+              <ClipLoader color="#36d7b7" size={50} />
             </div>
           )}
 
