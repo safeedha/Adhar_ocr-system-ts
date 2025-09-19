@@ -7,7 +7,7 @@ export class AadhaarOCRRepository {
          
      
         const frontBuffer = await sharp(frontImageUrl) .grayscale() .normalize() .resize({ width: 1000 }) .threshold(150) .toBuffer();
-         // Preprocess back image 
+       
          const backBuffer = await sharp(backImageUrl) .grayscale() .normalize() .resize({ width: 1000 }) .threshold(150) .toBuffer();
           const frontResult = await Tesseract.recognize(frontBuffer, "eng"); 
           const backResult = await Tesseract.recognize(backBuffer, "eng"); 

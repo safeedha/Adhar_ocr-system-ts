@@ -62,7 +62,7 @@ const UploadForm: React.FC = () => {
         setResult(res.data.message.data ?? null);
       }
     } catch (err) {
-      console.log(import.meta.env.VITE_API_URL);
+      console.log("this",import.meta.env.VITE_API_URL);
       console.error(err);
       toast.error("❌ OCR Failed. Please try again.");
     }
