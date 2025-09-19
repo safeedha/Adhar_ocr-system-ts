@@ -9,9 +9,9 @@ export interface OcrResult {
 }
 
 export interface OcrApiResponse {
-  message: {
+
     status: boolean;
     message: string;
     data?: OcrResult;
-  };
+  
 }

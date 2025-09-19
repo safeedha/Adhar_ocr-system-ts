@@ -55,11 +55,11 @@ const UploadForm: React.FC = () => {
         }
       );
      console.log(res)
-      if (res.data.message.status === false) {
-        toast.error(res.data.message.message);
+      if (res.data.status === false) {
+        toast.error(res.data.message);
       } else {
         toast.success("✅ OCR Processed Successfully!");
-        setResult(res.data.message.data ?? null);
+        setResult(res.data.data ?? null);
       }
     } catch (err) {
       console.log("this",import.meta.env.VITE_API_URL);
